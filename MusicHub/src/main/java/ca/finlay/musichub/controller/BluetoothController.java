@@ -2,6 +2,7 @@ package ca.finlay.musichub.controller;
 
 import android.app.Activity;
 import android.bluetooth.*;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import ca.finlay.musichub.model.BluetoothNotEnabledException;

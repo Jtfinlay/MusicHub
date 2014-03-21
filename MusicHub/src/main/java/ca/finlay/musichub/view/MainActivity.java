@@ -13,9 +13,11 @@ public class MainActivity extends ActionBarActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment())
+                    .add(R.id.fragment_container, new MainFragment())
                     .commit();
         }
+
+
     }
 
 }

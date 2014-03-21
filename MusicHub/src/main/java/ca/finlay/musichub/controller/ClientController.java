@@ -2,6 +2,10 @@ package ca.finlay.musichub.controller;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 import java.io.IOException;
 
@@ -9,6 +13,29 @@ import java.io.IOException;
  * Created by James on 3/14/14.
  */
 public class ClientController extends BluetoothController {
+
+    private BroadcastReceiver mReceiver;
+
+    public void startDeviceDiscovery(Context c) {
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                // When discovery finds a device
+                if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                    // Get bluetooth device from the Intent
+                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    // TODO:: Do something with the device
+                }
+            }
+        };
+        // Register the Broadcast Receiver
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        c.registerReceiver(mReceiver, filter);
+    }
+    public void stopDeviceDiscovery(Context c) {
+        c.unregisterReceiver(mReceiver);
+    }
 
 
     /**
